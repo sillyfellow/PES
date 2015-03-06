@@ -7,33 +7,7 @@ package main
 
 import "fmt"
 import "math"
-
-type IntSet struct {
-	set map[int]bool
-}
-
-func newIntSet() *IntSet {
-	return &IntSet{set: make(map[int]bool)}
-}
-
-func (set *IntSet) add(n int) bool {
-	_, found := set.set[n]
-	set.set[n] = true
-	return !found
-}
-
-func (set *IntSet) remove(n int) bool {
-	_, found := set.set[n]
-	if found {
-		delete(set.set, n)
-	}
-	return found
-}
-
-func (set *IntSet) contains(n int) bool {
-	_, found := set.set[n]
-	return found
-}
+import "github.com/sillyfellow/PES/golib"
 
 //if % is absent, use this.
 func is_k_divisor(n int, k int) bool {
@@ -56,8 +30,8 @@ func my_min(a, b int) int {
 
 //gets any one prime divisor of n
 //during it does it, the primes will be filled up with the primes which would be tested for suitable candidacy
-func get_prime_divisor(n int, primes *IntSet) int {
-	if primes.contains(n) {
+func get_prime_divisor(n int, primes *golib.IntSet) int {
+	if primes.Contains(n) {
 		return 0
 	}
 
@@ -66,7 +40,7 @@ func get_prime_divisor(n int, primes *IntSet) int {
 
 	//go through the set of primes first. Note the largest one we encountered
 	largest := int(2)
-	for k := range primes.set {
+	for k := range primes.Set {
 		if k > max_to_go {
 			continue
 		}
@@ -89,7 +63,7 @@ func get_prime_divisor(n int, primes *IntSet) int {
 			continue
 		}
 		//otherwise, add it to the list, and check for being a divisor
-		primes.add(largest)
+		primes.Add(largest)
 		if n%largest == 0 {
 			return largest
 		}
@@ -97,7 +71,7 @@ func get_prime_divisor(n int, primes *IntSet) int {
 	return 0
 }
 
-func find_divisors(n int, primes *IntSet) {
+func find_divisors(n int, primes *golib.IntSet) {
 	pd := get_prime_divisor(n, primes)
 	if pd == 0 { // the input is indeed a prime
 		fmt.Println(n)
@@ -110,5 +84,5 @@ func find_divisors(n int, primes *IntSet) {
 }
 
 func main() {
-	find_divisors(600851475143, newIntSet())
+	find_divisors(600851475143, golib.NewIntSet())
 }
