@@ -35,6 +35,11 @@ func get_prime_divisor(n int, primes *setutils.IntSet) int {
 	//we don't need to go beyond this
 	max_to_go := int(math.Ceil(math.Sqrt(float64(n))))
 
+	//for squares of primes, we go one extra step
+	if max_to_go*max_to_go == n {
+		max_to_go += 1
+	}
+
 	//go through the set of primes first. Note the largest one we encountered
 	largest := int(2)
 	for k := range primes.Set {
