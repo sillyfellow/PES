@@ -11,14 +11,14 @@ func is_k_divisor(n int, k int) bool {
 	return n == (n/k)*k
 }
 
-func my_max(a int, b int) int {
+func Max(a int, b int) int {
 	if a > b {
 		return a
 	}
 	return b
 }
 
-func my_min(a, b int) int {
+func Min(a, b int) int {
 	if a < b {
 		return a
 	}
@@ -46,7 +46,7 @@ func get_prime_divisor(n int, primes *setutils.IntSet) int {
 			return k
 		}
 
-		largest = my_max(k, largest)
+		largest = Max(k, largest)
 	}
 
 	// prevent the loophole in case the primes was initially filled with some
