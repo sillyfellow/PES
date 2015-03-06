@@ -1,4 +1,4 @@
-package golib
+package setutils
 
 type IntSet struct {
 	Set map[int]bool
